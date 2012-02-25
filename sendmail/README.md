@@ -16,8 +16,8 @@ Features include:
     form generation for non-developers
     
 -- 
-Copyright 2010-2012 by Tyler Larson <devel@tlarson.com>  
-All rights reserved.  
+Copyright 2010-2012 by Tyler Larson <devel@tlarson.com>. All rights reserved.  
+
 This code is distributed according to the terms of the the MIT License,
 a copy of which you can find at the following location:  
 http://www.opensource.org/licenses/mit-license.html
