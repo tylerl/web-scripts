@@ -25,7 +25,7 @@ $to_list = array(
 );
 
 # Subject of the email to be sent
-$subject = "Website Email from {$_SERVER[HTTP_HOST]} at ".date("r");
+$subject = "Website Email from {$_SERVER['HTTP_HOST']} at ".date("r");
 
 
 ##########
@@ -71,7 +71,7 @@ $form["FORM_URL"] = $_SERVER['HTTP_REFERER'];
 ##############################################################
 
 foreach($form as $key=>$val) {
-	$body = str_replace("{{".$key."}}",$val,$body);	
+	$body = str_replace("{{".$key."}}",htmlspecialchars($val),$body);	
 }
 
 # Only do spam check if we have a field to check and a page to redir to
@@ -85,7 +85,7 @@ if (!empty($spam_field) && !empty($spam_page)) {
 
 # Set mail headers
 $boundary = md5(time());
-$body = "--$boundary\nContent-type: text/plain\r\n\r\n".strip_tags($body)."\r\n--$boundary\r\nContent-type:text/html\r\n\r\n".$body;
+$body = "--$boundary\nContent-type: text/plain\r\n\r\n".reverse_htmlentities(strip_tags($body))."\r\n--$boundary\r\nContent-type:text/html\r\n\r\n".$body;
 $headers = "From: $from\nContent-type: multipart/alternative; boundary=\"$boundary\"\n";
 
 # send mails
@@ -138,6 +138,16 @@ function unset_magic_quotes() {
 		unset($process);
 	}
 }
-
+########################################################################
+# unescape HTML entities
+function reverse_htmlentities($mixed)
+{
+    $htmltable = get_html_translation_table(HTML_ENTITIES);
+    foreach($htmltable as $key => $value)
+    {
+        $mixed = ereg_replace(addslashes($value),$key,$mixed);
+    }
+    return $mixed;
+}
 ?>
 
