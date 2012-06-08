@@ -9,6 +9,7 @@ Includes:
 
    * `sendmail.php`: (Yet another) mail delivery script for contact pages
    * `mysqldump.php`: A stand-alone mysql backup dump generator using PHP
+   * `pear_mail`: A drop-in replacement for PHP's built-in mail() function
 
 Copyright &copy; 2010-2012 Tyler Larson. All rights reserved.
 
